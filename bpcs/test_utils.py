@@ -5,7 +5,8 @@ from tempfile import mkstemp
 import webbrowser
 GET_BROWSER = webbrowser.get("open -a '/Applications/Google Chrome.app' %s")
 
-def show_html_diff((f1, f1_name), (f2, f2_name)):
+
+def show_html_diff(f1, f1_name, f2, f2_name):
     assert type(f1) is str
     assert type(f2) is str
     fid, htmlfile = mkstemp('.html')
