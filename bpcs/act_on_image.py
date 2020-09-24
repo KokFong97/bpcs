@@ -46,3 +46,6 @@ class ActOnImage(object):
         im = array_to_image(arr)
         log.critical('Loaded new array as image')
         write_image(outfile, im)
+
+    def modify(self):
+        return NotImplementedError()
