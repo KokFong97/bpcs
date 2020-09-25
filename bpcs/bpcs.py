@@ -37,18 +37,25 @@ valid_opt_behaviors = {
     'decode': ['infile', 'outfile', 'alpha'],
     'capacity': ['infile', 'outfile', 'alpha'],
     'test': []
-    }
+}
 
-parser.add_argument('behavior', type=str, help='interaction modes: {0}'.format(valid_opt_behaviors.keys()))
-parser.add_argument('-i', '--infile', type=str, help='path to vessel image (.png)')
-parser.add_argument('-o', '--outfile', type=str, help='path to write output file')
-parser.add_argument('-m', '--messagefile', type=str, help='path to message file')
-parser.add_argument('-a', '--alpha', type=float, help='complexity threshold', default=0.45)
+parser.add_argument('behavior', type=str, help='interaction modes: {0}'.format(
+    valid_opt_behaviors.keys()))
+parser.add_argument('-i', '--infile', type=str,
+                    help='path to vessel image (.png)')
+parser.add_argument('-o', '--outfile', type=str,
+                    help='path to write output file')
+parser.add_argument('-m', '--messagefile', type=str,
+                    help='path to message file')
+parser.add_argument('-a', '--alpha', type=float,
+                    help='complexity threshold', default=0.45)
 opts = parser.parse_args()
+
 
 def check_file_exists(filename):
     if not os.path.exists(filename):
         parser.error('The file "{0}" could not be found.'.format(filename))
+
 
 if opts.behavior == 'decode':
     check_file_exists(opts.infile)
@@ -59,6 +66,6 @@ elif opts.behavior == 'encode':
     encode(opts.infile, opts.messagefile, opts.outfile, opts.alpha)
 elif opts.behavior == 'capacity':
     check_file_exists(opts.infile)
-    capacity(opts.infile, opts.outfile, opts.alpha)
+    capacity(opts.infile, alpha=opts.alpha,  outfile=opts.outfile)
 elif opts.behavior == 'test':
     test_all()
