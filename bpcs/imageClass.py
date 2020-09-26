@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 from functools import reduce
 
-from misc import board, calComplexity
+from .misc import board, calComplexity
 
 
 class imageClass():
@@ -97,8 +97,8 @@ class imageClass():
         self.conjugateGrids, self.messageGrids = self.separateGrids(
             self.usableGrids)
         print("Calculated!")
-        print("For an alpha of {0}, there is {1:.1}% usable space".format(
-            self.alpha, self.vesselUsage))
+        print("For an alpha of {0}, there is {1:.1}% ({2} bytes) usable space".format(
+            self.alpha, self.vesselUsage, self.usableSpace * 8))
 
     def separateGrids(self, grids):
         """

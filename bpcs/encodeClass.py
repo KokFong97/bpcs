@@ -1,8 +1,8 @@
 import numpy as np
 from functools import reduce
 
-from imageClass import imageClass
-from messageClass import messageClass
+from .imageClass import imageClass
+from .messageClass import messageClass
 
 
 class encoderClass():
