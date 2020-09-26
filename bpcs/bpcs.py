@@ -12,8 +12,6 @@ BEHAVIORS:
     capacity
         * expects a vessel image file and alpha value
         * assesses the maximum size of a message that could be encoded within the vessel image
-    test
-        * runs the unit tests
 """
 
 import os.path

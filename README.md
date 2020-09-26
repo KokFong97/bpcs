@@ -52,7 +52,3 @@ bpcs.encoderClass(vslfile, "", "", alpha).getCapacity()
 bpcs.encoderClass(vslfile, msgfile, encfile, alpha).encode()
 bpcs.decoderClass(encfile, msgfile_decoded, alpha).decode() # recover message from encfile
 ```
-
-### Running tests
-
-`$ python -m bpcs.bpcs test`
