@@ -20,6 +20,8 @@ class decoderClass():
         self.messages = None
         self.map = None
 
+        self.nullbits = None
+
         self.board = board(self.gridSize, self.gridSize)
 
     def toArray(self):
@@ -70,7 +72,6 @@ class decoderClass():
         self.grids = [grid for grid in self.grids
                       if self.high_complexity(self.arr[grid[0]: grid[1], grid[2]:grid[3], grid[4], grid[5]])]
 
-        print(len(self.grids))
         self.messages, self.map = self.separateGrids()
 
         print("Found grids!")
@@ -101,6 +102,7 @@ class decoderClass():
                          m[5]].reshape(-1).tolist()[tbSize:]
             tmparr += g
 
+        # First 8 bits of self.map is nullbits count
         self.map = tmparr
 
     def simplify(self, arr):
@@ -113,6 +115,14 @@ class decoderClass():
 
     def extractData(self):
         """Gets message according to map"""
+
+        # First 8 bits of self.map is nullbits count
+        self.nullbits = np.array(self.map[:8])
+        self.map = self.map[8:]
+
+        # Convert nullbits into decimal
+        self.nullbits = self.nullbits.dot(
+            2**np.arange(self.nullbits.shape[0])[::-1])
 
         for i, m in enumerate(self.messages):
             g = self.arr[m[0]:m[1], m[2]:m[3], m[4], m[5]]
@@ -129,6 +139,9 @@ class decoderClass():
         self.messages = self.messages.dot(
             2**np.arange(self.messages.shape[2])[::-1])
         bits = np.hstack(self.messages).flatten().tolist()
+
+        # Remove nullbits
+        bits = bits[:(-self.nullbits)]
         string = ''.join([chr(b) for b in bits])
 
         with open(self.outfile, 'w') as f:

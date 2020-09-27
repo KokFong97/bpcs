@@ -1,6 +1,6 @@
 import bpcs
 
-alpha = 0.01
+alpha = 0.45
 vslfile = './examples/vessel.png'
 msgfile = './examples/message.txt'  # can be any type of file
 encfile = './examples/output.png'

@@ -15,6 +15,8 @@ class messageClass():
         self.arr = None
         self.length = None
 
+        self.nullbits = 0
+
         self.board = board(self.gridSize, self.gridSize)
 
         self.tbSize = int(
@@ -34,6 +36,7 @@ class messageClass():
 
         # Ensuring char array can be reshaped into the gridSize
         while len(char_list) % self.gridSize != 0:
+            self.nullbits += 1
             char_list.append(0)
 
         tmparr = np.array(char_list)
@@ -61,6 +64,13 @@ class messageClass():
 
     def prepareConjMap(self):
         """ Converts conjugation map from list into numpy array, ready for insertion """
+
+        # Convert nullbits count into binary
+        self.nullbits = [int(x) for x in np.binary_repr(
+            self.nullbits).zfill(self.gridSize)]
+
+        # Add nullbits count at the start of conjMap
+        self.conjMap = self.nullbits + self.conjMap
 
         # Add trash bits to conjMap at appropriate intervals
         tmparr = []
