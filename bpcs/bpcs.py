@@ -10,10 +10,10 @@ msgfile = 'files/message.txt'  # Accepts strings too
 encfile = 'files/encoded.png'
 msgfile_decoded = 'files/output.txt'
 
-# check max size of message you can embed in vslfile
+
 en = encoderClass(vslfile, msgfile, encfile, alpha)
 de = decoderClass(encfile, msgfile_decoded, alpha)
 
 en.getCapacity()
-en.encode()
+en.encode()  # This checks max size of message before attempting to embed
 de.decode()
