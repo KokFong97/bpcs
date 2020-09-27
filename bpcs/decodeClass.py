@@ -70,6 +70,7 @@ class decoderClass():
         self.grids = [grid for grid in self.grids
                       if self.high_complexity(self.arr[grid[0]: grid[1], grid[2]:grid[3], grid[4], grid[5]])]
 
+        print(len(self.grids))
         self.messages, self.map = self.separateGrids()
 
         print("Found grids!")
@@ -87,12 +88,12 @@ class decoderClass():
         bitsPerGrid = self.gridSize*self.gridSize
         len_grids = len(self.grids)
         for x in range(len(self.grids)):
-            if (bitsPerGrid*x*(1-self.alpha)) >= (len_grids-x):
+            if (bitsPerGrid*x*(1-(self.alpha+0.1))) >= (len_grids-x):
                 return self.grids[:len_grids-x], self.grids[len_grids-x:]
 
     def unscrambleMap(self):
         """Removes trash bits from maps"""
-        tbSize = int(round(self.alpha*self.gridSize * self.gridSize))
+        tbSize = int(round((self.alpha+0.1)*self.gridSize * self.gridSize))
 
         tmparr = []
         for m in self.map:
@@ -136,9 +137,9 @@ class decoderClass():
 
 if __name__ == "__main__":
     alpha = 0.45
-    infile = 'files/output.png'
-    msg = 'files/message.txt'
-    outfile = 'files/output.txt'
+    infile = 'testFiles/output.png'
+    msg = 'testFiles/message.txt'
+    outfile = 'testFiles/output.txt'
 
     decoder = decoderClass(infile, outfile, alpha)
     decoder.decode()

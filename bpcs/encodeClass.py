@@ -1,6 +1,8 @@
 import numpy as np
 from functools import reduce
 
+from .misc import calComplexity
+
 from .imageClass import imageClass
 from .messageClass import messageClass
 
@@ -33,7 +35,7 @@ class encoderClass():
             exit()
         else:
             print("Verified size!")
-            print("Message Length: \t{0}\nVessel Usable Space:\t{1}".format(
+            print("Message Length: \t{0}\tgrid(s)\nVessel Usable Space:\t{1}\tgrid(s)".format(
                 self.message.length, self.vessel.usableSpace))
 
     def encode(self):
@@ -58,9 +60,9 @@ class encoderClass():
 
 if __name__ == "__main__":
     alpha = 0.45
-    vessel = 'files/vessel.png'
-    msg = 'files/message.txt'
-    outfile = 'files/output.png'
+    vessel = 'testFiles/vessel.png'
+    msg = 'testFiles/message.txt'
+    outfile = 'testFiles/output.png'
 
     encoder = encoderClass(vessel, msg, outfile, alpha)
     encoder.encode()

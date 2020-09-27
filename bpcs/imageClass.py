@@ -94,11 +94,12 @@ class imageClass():
 
         self.usableSpace = len(self.usableGrids)
 
-        self.conjugateGrids, self.messageGrids = self.separateGrids(
+        self.messageGrids, self.conjugateGrids = self.separateGrids(
             self.usableGrids)
+
         print("Calculated!")
-        print("For an alpha of {0}, there is {1:.1}% ({2} bytes) usable space".format(
-            self.alpha, self.vesselUsage, self.usableSpace * 8))
+        print("For an alpha of {0}, there is {1:.2%} ({2} bytes) usable space".format(
+            self.alpha, self.vesselUsage, len(self.messageGrids) * 8))
 
     def separateGrids(self, grids):
         """
@@ -151,7 +152,6 @@ class imageClass():
         self.arr[ys: ye, xs: xe, param, bits] = msg
 
     def cleanup(self):
-        print(self.usableSpace - self.i, self.usableSpace)
         for i in range(self.i, self.usableSpace):
             ys, ye, xs, xe, param, bits = self.getGrid()
             self.arr[ys: ye, xs: xe, param, bits] = np.zeros(
@@ -161,8 +161,8 @@ class imageClass():
 if __name__ == "__main__":
     alpha = 0.45
     gridSize = 8
-    im = imageClass('files/vessel.png',
-                    'files/output.png', alpha, gridSize)
+    im = imageClass('testFiles/vessel.png',
+                    'testFiles/output.png', alpha, gridSize)
     im.toArray()
     im.cal_capacity()
 

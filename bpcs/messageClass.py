@@ -17,7 +17,8 @@ class messageClass():
 
         self.board = board(self.gridSize, self.gridSize)
 
-        self.tbSize = int(round(self.alpha*self.gridSize * self.gridSize))
+        self.tbSize = int(
+            round((self.alpha + 0.1)*self.gridSize * self.gridSize))
 
         self.tb = self.board.reshape(
             -1).tolist()[:self.tbSize]
