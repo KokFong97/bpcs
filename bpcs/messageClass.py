@@ -1,7 +1,7 @@
 import numpy as np
 import os
 from functools import reduce
-from misc import calComplexity, board
+from .misc import calComplexity, board
 
 
 class messageClass():

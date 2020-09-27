@@ -3,7 +3,7 @@ from PIL import Image
 from functools import reduce
 import os
 
-from misc import board, calComplexity
+from .misc import board, calComplexity
 
 
 class decoderClass():
