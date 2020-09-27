@@ -20,7 +20,7 @@ class decoderClass():
         self.messages = None
         self.map = None
 
-        self.nullbits = None
+        self.nullbits = 0
 
         self.board = board(self.gridSize, self.gridSize)
 
@@ -65,7 +65,7 @@ class decoderClass():
         print("Finding grids!")
         self.grids = [[y, y+self.gridSize, x, x+self.gridSize, param, bits]
                       for param in range(3)
-                      for bits in range(self.gridSize)
+                      for bits in range(int(self.gridSize/2), self.gridSize)
                       for y in range(0, self.arr.shape[0], self.gridSize)
                       for x in range(0, self.arr.shape[1], self.gridSize)]
 

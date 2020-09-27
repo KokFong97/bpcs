@@ -85,7 +85,7 @@ class imageClass():
         print("Calculating Capacity...")
         self.totalGrids = [[y, y+self.gridSize, x, x+self.gridSize, param, bits]
                            for param in range(3)
-                           for bits in range(self.gridSize)
+                           for bits in range(int(self.gridSize/2), self.gridSize)
                            for y in range(0, self.arr.shape[0], self.gridSize)
                            for x in range(0, self.arr.shape[1], self.gridSize)]
 
@@ -97,9 +97,8 @@ class imageClass():
         self.messageGrids, self.conjugateGrids = self.separateGrids(
             self.usableGrids)
 
-        print("Calculated!")
-        print("For an alpha of {0}, there is {1:.2%} ({2} bytes) usable space".format(
-            self.alpha, self.vesselUsage, len(self.messageGrids) * 8))
+        print("With an alpha of {0}, there is {1:.2%} ({2} bytes) usable space".format(
+            self.alpha, self.vesselUsage, len(self.messageGrids) * 4))
 
     def separateGrids(self, grids):
         """
@@ -109,7 +108,7 @@ class imageClass():
         len_grids = len(grids)
         for x in range(len(grids)):
             if (bitsPerGrid*x) >= (len_grids-x):
-                self.vesselUsage = 8 * (len_grids - x) / \
+                self.vesselUsage = int(self.gridSize/2) * (len_grids - x) / \
                     os.path.getsize(self.infile)
                 return grids[:len_grids-x], grids[len_grids-x:]
 

@@ -22,7 +22,7 @@ class encoderClass():
         self.vessel.cal_capacity()
 
     def preProcess(self):
-        print("Loading...")
+        print("Loading files...")
         self.vessel.toArray()
         self.vessel.cal_capacity()
         self.message.toArray()
