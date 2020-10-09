@@ -32,7 +32,7 @@ class encoderClass():
     def verify(self):
         if self.message.length > self.vessel.usableSpace:
             print("Message too big for current parameters")
-            exit()
+            exit(1)
         else:
             print("Verified size!")
             print("Message Length: \t{0}\tgrid(s)\nVessel Usable Space:\t{1}\tgrid(s)".format(
